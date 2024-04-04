@@ -4,6 +4,7 @@ ckanext-tolltheme
 
 Tolltheme is a CKAN extension to customize Tolletaten's (Norwegian Customs) CKAN installation for providing open data
 to the public.
+Git repo moved from github.com/tolletaten/ckanext-tolltheme.git to github.com/toll/ckanext-tolltheme.git
 
 ------------
 Requirements

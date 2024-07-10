@@ -10,27 +10,29 @@
 
 {# Overrides the breadcrumb_content to change the text of the Dataset-link. #}
 {% block breadcrumb_content %}
-  <li class="active">{{ h.nav_link('Tolletatens åpne data', controller='package', action='search', named_route='search') }}</li>
+  <li class="active">{{ h.nav_link('Tolletatens åpne data', named_route='%s.search' % dataset_type) }}</li>
 {% endblock %}
 
 {# Overrides the form to edit the search field placeholder #}
 {% block form %}
   {# Unchanged #}
   {% set facets = {
-          'fields': c.fields_grouped,
-          'search': c.search_facets,
-          'titles': c.facet_titles,
-          'translated_fields': c.translated_fields,
-          'remove_field': c.remove_field } %}
+    'fields': fields_grouped,
+    'search': search_facets,
+    'titles': facet_titles,
+    'translated_fields': translated_fields,
+    'remove_field': remove_field }
+  %}
 
   {# Unchanged #}
   {% set sorting = [
-          (_('Relevance'), 'score desc, metadata_modified desc'),
-          (_('Name Ascending'), 'title_string asc'),
-          (_('Name Descending'), 'title_string desc'),
-          (_('Last Modified'), 'metadata_modified desc'),
-          (_('Popular'), 'views_recent desc') if g.tracking_enabled else (false, false) ] %}
+    (_('Relevance'), 'score desc, metadata_modified desc'),
+    (_('Name Ascending'), 'title_string asc'),
+    (_('Name Descending'), 'title_string desc'),
+    (_('Last Modified'), 'metadata_modified desc'),
+    (_('Popular'), 'views_recent desc') if g.tracking_enabled else (false, false) ]
+  %}
 
   {# Changed the placeholder to not include the ... #}
-  {% snippet 'snippets/search_form.html', form_id='dataset-search-form', type=dataset_type, query=c.q, sorting=sorting, sorting_selected=c.sort_by_selected, count=c.page.item_count, placeholder=_('Search ' + dataset_type + 's'), facets=facets, show_empty=request.params, error=c.query_error, fields=c.fields %}
+  {% snippet 'snippets/search_form.html', form_id='dataset-search-form', type=dataset_type, query=q, sorting=sorting, sorting_selected=sort_by_selected, count=page.item_count, placeholder=h.humanize_entity_type('package', dataset_type, 'search placeholder') or _('Search datasets'), facets=facets, show_empty=request.args, error=query_error, fields=fields %}
 {% endblock %}

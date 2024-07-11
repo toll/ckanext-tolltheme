@@ -10,13 +10,13 @@
   {% endif %}
 
   <div class="module-content">
-    <h2>{{ _('Additional Information') }}</h2>
+    {%- block additional_info_heading -%}{{ super() }}{%- endblock -%}
     <table class="table-borderless table-condensed" data-module="table-toggle-more">
       <tbody>
       {%- block resource_last_updated -%}
         <tr>
-          <th scope="row" class="dataset-resource-label">{{ _('Last updated') }}</th>
-          <td class="dataset-resource-details">{{ h.render_datetime(res.last_modified) or h.render_datetime(res.revision_timestamp) or h.render_datetime(res.created) or _('unknown') }}</td>
+          <th scope="row" class="dataset-resource-label">{{ _('Data last updated') }}</th>
+          <td class="dataset-resource-details">{{ h.render_datetime(res.last_modified) or h.render_datetime(res.created) or _('unknown') }}</td>
         </tr>
       {%- endblock -%}
       {%- block resource_created -%}
@@ -28,10 +28,10 @@
       {%- block resource_format -%}
         <tr>
           <th scope="row" class="dataset-resource-label">{{ _('Format') }}</th>
-          <td class="dataset-resource-details">{{ res.mimetype_inner or res.mimetype or res.format or _('unknown') }}</td>
+          <td class="dataset-resource-details">{{ res.format or res.mimetype_inner or res.mimetype or _('unknown') }}</td>
         </tr>
       {%- endblock -%}
-      {%- block resource_license_row -%}
+      {%- block resource_license -%}
         <tr>
           <th scope="row" class="dataset-resource-label">{{ _('License') }}</th>
           <td class="dataset-resource-details">{% snippet "snippets/license.html", pkg_dict=pkg, text_only=True %}</td>
@@ -55,18 +55,12 @@
           {%- endif -%}
         {%- endfor -%}
       {%- endblock -%}
-      {# Readded the toggle-more elements #}
-      {% for key, value in h.format_resource_items(res.items()) %}
-        <tr class="toggle-more">
-          <th scope="row" class="dataset-resource-label">{{ key }}</th>
-          <td class="dataset-resource-details">{{ value }}</td>
-        </tr>
-      {% endfor %}
+      {# Moved the toggle-more elements to bottom #}
+      {%- block resource_more_items -%}
+        {{ super() }}
+      {%- endblock -%}
       </tbody>
     </table>
 
   </div>
 {% endblock %}
-
-{# Overwritten to removes license information under the list of resources, by providing an empty block. #}
-{% block resource_license %}{% endblock %}

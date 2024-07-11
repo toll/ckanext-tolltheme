@@ -30,7 +30,7 @@
   {% block header_debug %}
     {% if g.debug and not g.debug_supress_header %}
       <header class="box">
-        <div class="debug">Debug info:<br>Controller : {{ c.controller }}<br />Action : {{ c.action }}</div>
+        <div class="debug">Blueprint : {{ g.blueprint }}<br />View : {{ g.view }}</div>
       </header>
     {% endif %}
   {% endblock %}

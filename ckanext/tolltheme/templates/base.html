@@ -1,11 +1,11 @@
 {% ckan_extends %}
 
-{%- block styles %}
-  {{ super() }}
-  <link rel="stylesheet" href="{{ h.tolltheme_url_with_version_token('/style.css') }}" />
-  <link rel="stylesheet" href="{{ h.tolltheme_url_with_version_token('/variables.css') }}" />
-{% endblock %}
 {%- block meta %}
   {{ super() }}
   <script src="/google-tag-manager.js"></script>
+{% endblock -%}
+{%- block custom_styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ h.tolltheme_url_with_version_token('/style.css') }}" />
+  <link rel="stylesheet" href="{{ h.tolltheme_url_with_version_token('/variables.css') }}" />
 {% endblock -%}

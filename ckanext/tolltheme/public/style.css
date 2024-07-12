@@ -221,34 +221,29 @@ footer {
   background-color: #E9E9E9;
 }
 
-.nav-item.active > a,
-.nav-aside li.active a {
+.module-narrow .nav-item.active,
+.module-narrow .nav-aside li.active {
   position: relative;
   color: black;
   background-color: #C0C0C0;
 }
 
-.nav-item.active > a:hover,
-.nav-aside li.active a:hover {
+.module-narrow .nav-item.active > a:hover,
+.module-narrow .nav-aside li.active a:hover {
   color: black;
   background-color: #C0C0C0;
 }
 
-@media (min-width: 768px) {
-  .nav-item.active > a:before,
-  .nav-aside li.active a:before {
-    border-left-color: #C0C0C0;
-  }
+.module-narrow .nav-item.active > a:before,
+.module-narrow .nav-aside li.active a:before {
+  border-left-color: #C0C0C0;
 }
 
-.nav-facet .nav-item.active > a:after {
+.module-narrow .nav-item.active > a:after {
   display: inline-block;
   vertical-align: text-bottom;
   background-image: url("/tolltheme-icons/cancel-icon.svg");
   background-repeat: no-repeat;
-}
-
-.nav-facet .nav-item.active > a:after {
   background-position: unset;
   right: 6px;
 }
